@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import './add_journal_screen.dart';
+
 class JournalListScreen extends StatelessWidget {
   const JournalListScreen({super.key});
 
@@ -8,7 +10,13 @@ class JournalListScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Your Journal'),
-        actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.add))],
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed(AddJournalScreen.routName);
+              },
+              icon: const Icon(Icons.add))
+        ],
       ),
       body: const Center(
         child: CircularProgressIndicator(),
