@@ -12,7 +12,7 @@ class JournalLocation {
 class Journal {
   final String id;
   final String title;
-  final JournalLocation location;
+  final JournalLocation? location;
   final File image;
 
   Journal(

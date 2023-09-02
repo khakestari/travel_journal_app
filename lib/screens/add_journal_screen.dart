@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../widgets/image_input.dart';
+import '../providers/user_journals.dart';
 
 class AddJournalScreen extends StatefulWidget {
   static const routName = '/add-journal';
@@ -13,6 +17,20 @@ class AddJournalScreen extends StatefulWidget {
 
 class _AddJournalScreenState extends State<AddJournalScreen> {
   final _titleController = TextEditingController();
+  File? _pickedImage;
+
+  void _selectImage(File pickedImage) {
+    _pickedImage = pickedImage;
+  }
+
+  void _saveJournal() {
+    if (_titleController.text.isEmpty || _pickedImage == null) {
+      return;
+    }
+    Provider.of<UserJournals>(context, listen: false)
+        .addJournal(_titleController.text, _pickedImage as File);
+    Navigator.of(context).pop();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +52,7 @@ class _AddJournalScreenState extends State<AddJournalScreen> {
                       controller: _titleController,
                     ),
                     SizedBox(height: 10),
-                    ImageInput()
+                    ImageInput(_selectImage)
                   ],
                 ),
               ),
@@ -51,7 +69,7 @@ class _AddJournalScreenState extends State<AddJournalScreen> {
                 tapTargetSize: MaterialTapTargetSize.shrinkWrap),
             icon: const Icon(Icons.add),
             label: const Text('Add journal'),
-            onPressed: () {},
+            onPressed: _saveJournal,
           )
         ],
       ),
