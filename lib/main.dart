@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
       value: UserJournals(),
       child: MaterialApp(
         title: 'Travel Journal App',
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(
             brightness: Brightness.dark,

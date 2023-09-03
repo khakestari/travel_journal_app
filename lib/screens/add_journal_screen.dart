@@ -8,9 +8,7 @@ import '../providers/user_journals.dart';
 
 class AddJournalScreen extends StatefulWidget {
   static const routName = '/add-journal';
-
   const AddJournalScreen({super.key});
-
   @override
   State<AddJournalScreen> createState() => _AddJournalScreenState();
 }
@@ -28,7 +26,7 @@ class _AddJournalScreenState extends State<AddJournalScreen> {
       return;
     }
     Provider.of<UserJournals>(context, listen: false)
-        .addJournal(_titleController.text, _pickedImage as File);
+        .addJournal(_titleController.text, _pickedImage!);
     Navigator.of(context).pop();
   }
 
@@ -51,8 +49,8 @@ class _AddJournalScreenState extends State<AddJournalScreen> {
                       decoration: const InputDecoration(label: Text('Title')),
                       controller: _titleController,
                     ),
-                    SizedBox(height: 10),
-                    ImageInput(_selectImage)
+                    const SizedBox(height: 10),
+                    ImageInput(_selectImage),
                   ],
                 ),
               ),
@@ -62,7 +60,7 @@ class _AddJournalScreenState extends State<AddJournalScreen> {
           //  Form(child: child),
           TextButton.icon(
             style: TextButton.styleFrom(
-                shape: RoundedRectangleBorder(),
+                shape: const RoundedRectangleBorder(),
                 // side: RoundedRectangleBorder(),
                 backgroundColor: Colors.brown,
                 elevation: 0,
