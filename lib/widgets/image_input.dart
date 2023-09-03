@@ -16,10 +16,15 @@ class ImageInput extends StatefulWidget {
 
 class _ImageInputState extends State<ImageInput> {
   File? _storedImage;
-  Future<void> _takePicture() async {
+  Future<void> _takePicture(String imageSource) async {
     final picker = ImagePicker();
+
     final imageFile = await picker.pickImage(
-      source: ImageSource.camera,
+      source: imageSource == 'camera'
+          ? ImageSource.camera
+          : imageSource == 'gallery'
+              ? ImageSource.gallery
+              : ImageSource.camera,
       maxHeight: 600,
     );
     if (imageFile == null) {
@@ -58,12 +63,25 @@ class _ImageInputState extends State<ImageInput> {
         ),
         const SizedBox(width: 10),
         Expanded(
-            child: TextButton.icon(
-                onPressed: _takePicture,
+            child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            TextButton.icon(
+                onPressed: () => _takePicture('camera'),
                 style: TextButton.styleFrom(
+                    minimumSize: Size(double.infinity, 20),
                     backgroundColor: const Color(0xFF795548)),
                 icon: const Icon(Icons.camera),
-                label: const Text('Take Picture')))
+                label: const Text('Take Picture')),
+            TextButton.icon(
+                onPressed: () => _takePicture('gallery'),
+                style: TextButton.styleFrom(
+                    minimumSize: Size(double.infinity, 20),
+                    backgroundColor: const Color(0xFF795548)),
+                icon: const Icon(Icons.add_photo_alternate),
+                label: const Text('Browse Gallery')),
+          ],
+        )),
       ],
     );
   }

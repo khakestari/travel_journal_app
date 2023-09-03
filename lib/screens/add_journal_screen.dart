@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../widgets/image_input.dart';
 import '../providers/user_journals.dart';
+import '../widgets/location_input.dart';
 
 class AddJournalScreen extends StatefulWidget {
   static const routName = '/add-journal';
@@ -51,6 +52,8 @@ class _AddJournalScreenState extends State<AddJournalScreen> {
                     ),
                     const SizedBox(height: 10),
                     ImageInput(_selectImage),
+                    SizedBox(height: 10),
+                    LocationInput()
                   ],
                 ),
               ),
@@ -68,7 +71,7 @@ class _AddJournalScreenState extends State<AddJournalScreen> {
             icon: const Icon(Icons.add),
             label: const Text('Add journal'),
             onPressed: _saveJournal,
-          )
+          ),
         ],
       ),
     );
