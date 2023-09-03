@@ -20,22 +20,33 @@ class JournalListScreen extends StatelessWidget {
               icon: const Icon(Icons.add))
         ],
       ),
-      body: Consumer<UserJournals>(
-        builder: (ctx, userJournals, ch) => userJournals.items.length <= 0
-            ? ch!
-            : ListView.builder(
-                itemCount: userJournals.items.length,
-                itemBuilder: (ctx, i) => ListTile(
-                  title: Text(userJournals.items[i].title),
-                  leading: CircleAvatar(
-                    backgroundImage: FileImage(userJournals.items[i].image),
+      body: FutureBuilder(
+        future: Provider.of<UserJournals>(context, listen: false)
+            .fetchAndSetJournals(),
+        builder: (ctx, snapshot) =>
+            snapshot.connectionState == ConnectionState.waiting
+                ? const Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : Consumer<UserJournals>(
+                    builder: (ctx, userJournals, ch) =>
+                        userJournals.items.length <= 0
+                            ? ch!
+                            : ListView.builder(
+                                itemCount: userJournals.items.length,
+                                itemBuilder: (ctx, i) => ListTile(
+                                  title: Text(userJournals.items[i].title),
+                                  leading: CircleAvatar(
+                                    backgroundImage:
+                                        FileImage(userJournals.items[i].image),
+                                  ),
+                                  onTap: () {},
+                                ),
+                              ),
+                    child: const Center(
+                      child: Text('Got no journal yet, start adding some'),
+                    ),
                   ),
-                  onTap: () {},
-                ),
-              ),
-        child: const Center(
-          child: Text('Got no journal yet, start adding some'),
-        ),
       ),
     );
   }
