@@ -5,8 +5,8 @@ class JournalLocation {
   final double longitude;
   final String? address;
 
-  JournalLocation(
-      {required this.longitude, required this.latitude, this.address});
+  const JournalLocation(
+      {required this.latitude, required this.longitude, this.address});
 }
 
 class Journal {

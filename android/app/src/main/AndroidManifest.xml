@@ -5,6 +5,8 @@
         android:label="travel_journal_app"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyCFVMQcLk3x6ehkV7pKwAMBlI7ixuFHW1I"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

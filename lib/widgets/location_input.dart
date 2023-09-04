@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 
+import '../helpers/location_helper.dart';
+import '../screens/map_screen.dart';
+
 class LocationInput extends StatefulWidget {
   const LocationInput({super.key});
 
@@ -13,6 +16,31 @@ class _LocationInputState extends State<LocationInput> {
 
   Future<void> _getCurrentUserLocation() async {
     final locData = await Location().getLocation();
+    // print(locData.latitude);
+    // print(locData.longitude);
+    // print('ay tossss');
+    final staticMapImageUrl = LocationHelper.generateLocationPreviewImage(
+      latitude: locData.latitude!,
+      longitude: locData.longitude!,
+    );
+    setState(() {
+      _previewImageUrl = staticMapImageUrl;
+    });
+  }
+
+  Future<void> _selectOnMap() async {
+    final selectedLocation = await Navigator.of(context).push(
+      MaterialPageRoute(
+        fullscreenDialog: true,
+        builder: (ctx) => MapScreen(
+          isSelecting: true,
+        ),
+      ),
+    );
+    if (selectedLocation == null) {
+      return;
+    }
+    //..
   }
 
   @override
@@ -32,7 +60,7 @@ class _LocationInputState extends State<LocationInput> {
                   textAlign: TextAlign.center,
                 )
               : Image.network(
-                  '_previewImageUrl',
+                  _previewImageUrl!,
                   fit: BoxFit.cover,
                   width: double.infinity,
                 ),
@@ -42,13 +70,13 @@ class _LocationInputState extends State<LocationInput> {
           children: [
             TextButton.icon(
               onPressed: _getCurrentUserLocation,
-              icon: Icon(Icons.location_on),
-              label: Text('Current Location'),
+              icon: const Icon(Icons.location_on),
+              label: const Text('Current Location'),
             ),
             TextButton.icon(
-              onPressed: () {},
-              icon: Icon(Icons.map),
-              label: Text('Select on map'),
+              onPressed: _selectOnMap,
+              icon: const Icon(Icons.map),
+              label: const Text('Select on map'),
             ),
           ],
         )
