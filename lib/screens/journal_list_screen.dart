@@ -36,6 +36,8 @@ class JournalListScreen extends StatelessWidget {
                                 itemCount: userJournals.items.length,
                                 itemBuilder: (ctx, i) => ListTile(
                                   title: Text(userJournals.items[i].title),
+                                  subtitle: Text(
+                                      userJournals.items[i].location!.address!),
                                   leading: CircleAvatar(
                                     backgroundImage:
                                         FileImage(userJournals.items[i].image),

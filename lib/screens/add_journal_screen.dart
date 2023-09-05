@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../models/journal.dart';
 import '../widgets/image_input.dart';
 import '../providers/user_journals.dart';
 import '../widgets/location_input.dart';
@@ -17,17 +18,24 @@ class AddJournalScreen extends StatefulWidget {
 class _AddJournalScreenState extends State<AddJournalScreen> {
   final _titleController = TextEditingController();
   File? _pickedImage;
+  JournalLocation? _pickedLocation;
 
   void _selectImage(File pickedImage) {
     _pickedImage = pickedImage;
   }
 
+  void _selectPlace(double lat, double lng) {
+    _pickedLocation = JournalLocation(latitude: lat, longitude: lng);
+  }
+
   void _saveJournal() {
-    if (_titleController.text.isEmpty || _pickedImage == null) {
+    if (_titleController.text.isEmpty ||
+        _pickedImage == null ||
+        _pickedLocation == null) {
       return;
     }
     Provider.of<UserJournals>(context, listen: false)
-        .addJournal(_titleController.text, _pickedImage!);
+        .addJournal(_titleController.text, _pickedImage!, _pickedLocation!);
     Navigator.of(context).pop();
   }
 
@@ -53,7 +61,7 @@ class _AddJournalScreenState extends State<AddJournalScreen> {
                     const SizedBox(height: 10),
                     ImageInput(_selectImage),
                     SizedBox(height: 10),
-                    LocationInput()
+                    LocationInput(_selectPlace),
                   ],
                 ),
               ),

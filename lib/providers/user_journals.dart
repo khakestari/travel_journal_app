@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../models/journal.dart';
 import '../helpers/db_helper.dart';
+import '../helpers/location_helper.dart';
 
 class UserJournals with ChangeNotifier {
   List<Journal> _items = [];
@@ -12,11 +13,18 @@ class UserJournals with ChangeNotifier {
     return [..._items];
   }
 
-  void addJournal(String pickedTitle, File pickedImage) {
+  Future<void> addJournal(String pickedTitle, File pickedImage,
+      JournalLocation pickedLocation) async {
+    final address = await LocationHelper.getPlaceAddress(
+        latitude: pickedLocation.latitude, longitude: pickedLocation.longitude);
+    final updatedLocation = JournalLocation(
+        latitude: pickedLocation.latitude,
+        longitude: pickedLocation.longitude,
+        address: address);
     final newJournal = Journal(
       id: DateTime.now().toString(),
       title: pickedTitle,
-      location: null,
+      location: updatedLocation,
       image: pickedImage,
     );
     _items.add(newJournal);
@@ -25,6 +33,9 @@ class UserJournals with ChangeNotifier {
       'id': newJournal.id,
       'title': newJournal.title,
       'image': newJournal.image.path,
+      'loc_lat': newJournal.location!.latitude,
+      'loc_lng': newJournal.location!.longitude,
+      'address': newJournal.location!.address!,
     });
   }
 
@@ -35,7 +46,11 @@ class UserJournals with ChangeNotifier {
           (item) => Journal(
             id: item['id'],
             title: item['title'],
-            location: null,
+            location: JournalLocation(
+              latitude: item['loc_lat'],
+              longitude: item['loc_lng'],
+              address: item['address'],
+            ),
             image: File(item['image']),
           ),
         )
