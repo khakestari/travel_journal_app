@@ -1,16 +1,24 @@
-# travel_journal_app
-
+# Journal App
+A Flutter mobile application for creating and saving journals. This app allows you to capture moments by adding titles, images (from the gallery or camera), and even location information. All your journal entries are securely saved using SQLite on your device.
 A new Flutter project.
 
-## Getting Started
+## Features
+- Create and save journal entries.
+- Add titles and descriptions to your entries.
+- Capture and attach images from your device's gallery or camera.
+- Attach location information to your entries using Google Maps.
+- View, edit, and delete previously saved journal entries.
+- Securely store your data on your device using SQLite.
 
-This project is a starting point for a Flutter application.
+## Screenshots
+soon be added
 
-A few resources to get you started if this is your first Flutter project:
+## Contributing
+Contributions are welcome! Here are some ways you can contribute to this project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Report bugs and suggest improvements by opening issues.
+- Implement new features or enhance existing ones and submit pull requests.
+- Provide feedback on the app's usability and design.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Acknowledgements
+This app was inspired from the [Flutter & Dart - The Complete Guide](https://www.udemy.com/course/learn-flutter-dart-to-build-ios-android-apps/?kw=flutter&src=sac) course created by Maximilian Schwarzmüller on Udemy. Thank you to the instructors for providing such a great resource!
