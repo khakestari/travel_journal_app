@@ -11,7 +11,9 @@ A new Flutter project.
 - Securely store your data on your device using SQLite.
 
 ## Screenshots
-soon be added
+<img src="https://github.com/khakestari/travel_journal_app/assets/77167918/93687196-3cd8-408e-a10f-45fca729ee97" alt="Home" width="200">
+<img src="https://github.com/khakestari/travel_journal_app/assets/77167918/081ef21d-bf8f-419d-ab0e-90654f1d8707" alt="Home" width="200">
+<img src="https://github.com/khakestari/travel_journal_app/assets/77167918/cf87ad41-1d4c-4753-a256-0863db9eb614" alt="Home" width="200">
 
 ## Contributing
 Contributions are welcome! Here are some ways you can contribute to this project:
