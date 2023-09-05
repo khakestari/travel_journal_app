@@ -13,6 +13,10 @@ class UserJournals with ChangeNotifier {
     return [..._items];
   }
 
+  Journal findById(String id) {
+    return _items.firstWhere((element) => element.id == id);
+  }
+
   Future<void> addJournal(String pickedTitle, File pickedImage,
       JournalLocation pickedLocation) async {
     final address = await LocationHelper.getPlaceAddress(

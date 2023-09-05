@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import './add_journal_screen.dart';
 import '../providers/user_journals.dart';
+import '../screens/journal_detail_screen.dart';
 
 class JournalListScreen extends StatelessWidget {
   const JournalListScreen({super.key});
@@ -42,7 +43,12 @@ class JournalListScreen extends StatelessWidget {
                                     backgroundImage:
                                         FileImage(userJournals.items[i].image),
                                   ),
-                                  onTap: () {},
+                                  onTap: () {
+                                    Navigator.of(context).pushNamed(
+                                      JournalDetailScreen.routName,
+                                      arguments: userJournals.items[i].id,
+                                    );
+                                  },
                                 ),
                               ),
                     child: const Center(

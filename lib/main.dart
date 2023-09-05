@@ -5,6 +5,7 @@ import './providers/user_journals.dart';
 
 import './screens/journal_list_screen.dart';
 import './screens/add_journal_screen.dart';
+import './screens/journal_detail_screen.dart';
 
 void main() => runApp(const MyApp());
 
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
         home: JournalListScreen(),
         routes: {
           AddJournalScreen.routName: (ctx) => AddJournalScreen(),
+          JournalDetailScreen.routName: (ctx) => JournalDetailScreen()
         },
       ),
     );
